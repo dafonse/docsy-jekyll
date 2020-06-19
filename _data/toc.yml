@@ -5,7 +5,7 @@
       url: "about"
     - title: "Extras"
       url: "docs/extras"
-      children:
+      dropdown:
         - title: Quizzes
           url: "docs/extras/example-quiz"
         - title: Tags Page
