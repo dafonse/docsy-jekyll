@@ -1,6 +1,15 @@
 - title: Documentation
   url: docs
   links:
+    - title: "About"
+      url: "about"
+    - title: "Extras"
+      url: "docs/extras"
+      children:
+        - title: Quizzes
+          url: "docs/extras/example-quiz"
+        - title: Tags Page
+          url: "tags"
     - title: "Getting Started"
       url: "docs/getting-started"
       children:
@@ -10,14 +19,8 @@
           url: "docs/getting-started#development"
         - title: Customization
           url: "docs/getting-started#customization"
-    - title: "Extras"
-      url: "docs/extras"
-      children:
-        - title: Quizzes
-          url: "docs/extras/example-quiz"
-        - title: Tags Page
-          url: "tags"
-    - title: "About"
-      url: "about"
     - title: "News"
       url: "news"
+
+- title: Finanças
+  url: fin
