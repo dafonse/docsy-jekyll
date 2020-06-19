@@ -9,11 +9,31 @@
                             <a class="nav-link" href="{{ site.repo }}" target="_blank"><span>GitHub</span></a>
 			</li>{% endif %}
 			
-			{% for link in site.data.navigation %}
-			  <li class="nav-item mr-4 mb-2 mb-lg-0">
-			  <a class="nav-link" href="{% if link.url %}{{ site.baseurl }}/{{ link.url }}{% else %}{{ link.external_url }}{% endif %}" ><span>{{ link.title }}</span></a>
-			  </li>
-			{% endfor %}
+		{% for link in site.data.navigation %}
+			{% if link.dropdown == nil %}
+				<li{% if link.url == page.url %} class="active"{% elsif page.homepage == true and link.url == '/' %} class="active"{% endif %}><a {% if link.class %}class="{{link.class}}"{% endif %} href="{{ domain }}{{ site.baseurl }}{{ link.url }}"{% if link.url contains 'http' %} target="_blank"{% endif %}>{{ link.title | escape }}</a></li>
+				<li class="divider"></li>
+			{% else %}
+				<li class="has-dropdown{% if link.url == page.url %} active{% endif %}">
+				<a {% if link.class %}class="{{link.class}}"{% endif %} href="{{ domain }}{{ site.baseurl }}{{ link.url }}"{% if link.url contains 'http' %} target="_blank"{% endif %}>{{ link.title | escape }}</a>
+
+                  		<ul class="dropdown">
+                    		{% for dropdown_link in link.dropdown %}
+
+                      			{% if dropdown_link.url contains 'http' %}
+                        			{% assign domain = '' %}
+                        		{% else %}
+                        			{% assign domain = site.url %}
+                      			{% endif %}
+
+                     		<li><a {% if dropdown_link.class %}class="{{dropdown_link.class}}"{% endif %} href="{{ domain }}{{ site.baseurl }}{{ dropdown_link.url }}"{% if dropdown_link.url contains 'http' %} target="_blank"{% endif %}>{{ dropdown_link.title | escape }}</a></li>
+                    		{% endfor %}
+                  		</ul>
+
+              			</li>
+              			<li class="divider"></li>
+			{% endif %}
+		{% endfor %}
 			
 			
 
