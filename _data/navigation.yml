@@ -1,6 +1,6 @@
 - title: About
   url: about
-  dropdown:
+  sublinks:
   - title: Teste
     url: docs
 
