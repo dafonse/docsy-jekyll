@@ -12,8 +12,8 @@
 			{% for link in site.data.navigation %}			
             		  {% if link.sublinks %}
                 	    <li class="nav-item mr-4 mb-2 mb-lg-0">
-                    	      <a href=href="{% if sublinks.url %}{{ site.baseurl }}/{{ sublinks.url }}{% else %}{{ sublinks.external_url }}{% endif %}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ link.title }} <span class="caret">{{ sublinks.title }}</span></a>
-                    	      <ul class="nav-item mr-4 mb-2 mb-lg-0">
+                    	      <a href=href="{% if sublinks.url %}{{ site.baseurl }}/{{ sublinks.url }}{% else %}{{ sublinks.external_url }}{% endif %}" class="nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ link.title }} <span class="caret">{{ sublinks.title }}</span></a>
+                    	      <ul class="dropdown-menu">
                         	{% for sublink in link.sublinks %}
 				      
                                   {% if sublink.title == 'separator' %}
