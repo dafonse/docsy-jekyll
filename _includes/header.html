@@ -9,34 +9,29 @@
                             <a class="nav-link" href="{{ site.repo }}" target="_blank"><span>GitHub</span></a>
 			</li>{% endif %}
 			
-		{% for link in site.data.navigation %}
-			{% if link.dropdown == nil %}
-				<li{% if link.url == page.url %} class="active"{% elsif page.homepage == true and link.url == '/' %} class="active"{% endif %}><a {% if link.class %}class="{{link.class}}"{% endif %} href="{{ domain }}{{ site.baseurl }}{{ link.url }}"{% if link.url contains 'http' %} target="_blank"{% endif %}>{{ link.title | escape }}</a></li>
-				<li class="divider"></li>
-			{% else %}
-				<li class="has-dropdown{% if link.url == page.url %} active{% endif %}">
-				<a {% if link.class %}class="{{link.class}}"{% endif %} href="{{ domain }}{{ site.baseurl }}{{ link.url }}"{% if link.url contains 'http' %} target="_blank"{% endif %}>{{ link.title | escape }}</a>
-
-                  		<ul class="dropdown">
-                    		{% for dropdown_link in link.dropdown %}
-
-                      			{% if dropdown_link.url contains 'http' %}
-                        			{% assign domain = '' %}
-                        		{% else %}
-                        			{% assign domain = site.url %}
-                      			{% endif %}
-
-                     		<li><a {% if dropdown_link.class %}class="{{dropdown_link.class}}"{% endif %} href="{{ domain }}{{ site.baseurl }}{{ dropdown_link.url }}"{% if dropdown_link.url contains 'http' %} target="_blank"{% endif %}>{{ dropdown_link.title | escape }}</a></li>
-                    		{% endfor %}
-                  		</ul>
-
-              			</li>
-              			<li class="divider"></li>
-			{% endif %}
-		{% endfor %}
-			
-			
-
+			{% for link in site.data.navigation %}			
+            		  {% if link.sublinks %}
+                	    <li class="dropdown">
+                    	      <a href=href="{% if sublinks.url %}{{ site.baseurl }}/{{ sublinks.url }}{% else %}{{ sublinks.external_url }}{% endif %}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ link.title }} <span class="caret">{{ sublinks.title }}</span></a>
+                    	      <ul class="dropdown-menu">
+                        	{% for sublink in link.sublinks %}
+				      
+                                  {% if sublink.title == 'separator' %}
+                                    <li role="separator" class="divider"></li>
+                                  {% else %}
+                                    <li>
+                                      <a href="{{ site.url }}{{ site.baseurl }}{{ sublink.url }}">{{ sublink.title }}</a>
+                                    </li>
+                                  {% endif %}
+                                {% endfor %}
+                              </ul>
+                            </li>
+                          {% else %}
+			    <li class="nav-item mr-4 mb-2 mb-lg-0">
+                              <a class="nav-link" href="{% if link.url %}{{ site.baseurl }}/{{ link.url }}{% else %}{{ link.external_url }}{% endif %}" ><span>{{ link.title }}</span></a>
+			    </li>
+                          {% endif %}
+			{% endfor %}		
 
 		</ul>
 	</div>
